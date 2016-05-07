@@ -1,0 +1,11 @@
+https://www.youtube.com/watch?v=JQXfIidfFMo&index=3&list=PLe60o7ed8E-TztoF2K3y4VdDgT6APZ0ka
+http://www.infoq.com/presentations/Android-Design/
+https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer
+http://stackoverflow.com/questions/10267910/jsonexception-value-of-type-java-lang-string-cannot-be-converted-to-jsonobject
+http://stackoverflow.com/questions/32488071/search-and-return-result-from-online-database-api-android-studio-sdk
+http://stackoverflow.com/questions/25948191/send-post-request-using-volley-and-receive-in-php
+
+
+
+Get a json string via php
+http://www.kodingmadesimple.com/2015/01/convert-mysql-to-json-using-php.html
