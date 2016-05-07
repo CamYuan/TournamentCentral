@@ -6,10 +6,10 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TeamRequest extends StringRequest {
-    private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/QueryTeams.php";
+public class TourneyRequest extends StringRequest {
+    private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/QueryTournaments.php";
 
-    public TeamRequest(Response.Listener<String> listener) {
+    public TourneyRequest(Response.Listener<String> listener) {
         super(Method.POST, LOGIN_REQUEST_URL, listener, null);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.cy1023.tournamentcentral;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +68,12 @@ public class HostFragment extends Fragment {
             }
         });
         return host_view;
+    }
+
+    public void setDate(){
+        PickerDialogs pickerDialogs = new PickerDialogs();
+        pickerDialogs.show(getActivity().getFragmentManager(), "date_picker");
+
     }
 
 }

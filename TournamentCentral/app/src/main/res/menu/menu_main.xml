@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.lha30319.bitsandpizzas.MainActivity">
+    tools:context=".MainActivity">
     <item
         android:id="@+id/host_tourney"
         android:orderInCategory="1"

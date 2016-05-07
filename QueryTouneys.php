@@ -4,14 +4,14 @@
   	  die( 'connect error: '.mysqli_connect_error() );
   	}
 
-    $statement = mysqli_prepare($connection, "SELECT * FROM teams");
+    $statement = mysqli_prepare($connection, "SELECT * FROM tournaments");
   	if ( !$statement ) {
   	  die(mysqli_error($connection));
   	}
     mysqli_stmt_execute($statement);
 
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $teamID, $coach, $team_name);
+    mysqli_stmt_bind_result($statement, $tournamentID, $host, $team_name);
 
     $response = array();
     $rows = array();

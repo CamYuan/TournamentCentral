@@ -21,11 +21,13 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.cy1023.tournamentcentral.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
@@ -33,9 +35,7 @@ import java.util.Vector;
 public class TournamentsFragment extends ListFragment {
 
     //get SQL tournaments and show them
-    public String[] Tournaments;
     List<String> tourneys = new ArrayList<String>();
-    public ArrayList<Participants> list_of_tournaments = new ArrayList<>(32);
 
 
     public TournamentsFragment() {
@@ -44,47 +44,41 @@ public class TournamentsFragment extends ListFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final LinearLayout linearLayout = new LinearLayout(getActivity());
-        getActivity().setContentView(linearLayout);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
         // Response received from the server
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    TextView textView = new TextView(getActivity());
-                    textView.setText(response);
-                    linearLayout.addView(textView);
-                    Toast toast = Toast.makeText(getActivity(), response,
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                        //go back to the home page
-                    String team_names = jsonResponse.getString("team_name");
-                    tourneys.add(team_names);
-                    //tourneys.add(team_names);
+                    //Log.d("Debug", response);
+                    //load the Json array that you get from the PHP file
+                    // "[" Brackets indicate JSON Array
+                    // "{" Curly Braces indicate JSON Objects
+                    //PHP file returns "arrayName" [ {Object}, {Object}, ...]
+                    JSONArray resultsArray = new JSONArray(response);
+                    for (int i=0; i<resultsArray.length(); i++){
+                        JSONObject team_object = resultsArray.getJSONObject(i);
+                        String team_name = team_object.getString("team_name");
+                        //Log.d("Debug", team_name);
+                        tourneys.add(team_name);
+                    }
+                    Collections.sort(tourneys);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            inflater.getContext(),
+                            android.R.layout.simple_list_item_1,
+                            tourneys);
+                    setListAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        TeamRequest teamRequest = new TeamRequest("cam", responseListener);
+        TeamRequest teamRequest = new TeamRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(teamRequest);
 
-        //Arrays.sort(Tournaments);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                inflater.getContext(),
-                android.R.layout.simple_list_item_1,
-                tourneys);
-                //getResources().getStringArray(R.array.Tournaments));
-        setListAdapter(adapter);
         return super.onCreateView(inflater, container, savedInstanceState);
-        //TextView textView = new TextView(getActivity());
-        //textView.setText(R.string.hello_blank_fragment);
-        //return textView;
     }
 }

@@ -2,10 +2,22 @@ https://www.youtube.com/watch?v=JQXfIidfFMo&index=3&list=PLe60o7ed8E-TztoF2K3y4V
 http://www.infoq.com/presentations/Android-Design/
 https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer
 http://stackoverflow.com/questions/10267910/jsonexception-value-of-type-java-lang-string-cannot-be-converted-to-jsonobject
+
+Search and return result from online database API (Android Studio SDK)
 http://stackoverflow.com/questions/32488071/search-and-return-result-from-online-database-api-android-studio-sdk
+
+Send post request using Volley and receive in PHP
 http://stackoverflow.com/questions/25948191/send-post-request-using-volley-and-receive-in-php
 
 
 
 Get a json string via php
 http://www.kodingmadesimple.com/2015/01/convert-mysql-to-json-using-php.html
+
+
+
+Android JSON Parsing Tutorial
+http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
+
+Java/SQL Date Settings
+http://stackoverflow.com/questions/2305973/java-util-date-vs-java-sql-date
