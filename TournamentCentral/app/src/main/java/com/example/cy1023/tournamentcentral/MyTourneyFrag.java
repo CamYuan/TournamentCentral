@@ -6,7 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -71,5 +75,14 @@ public class MyTourneyFrag extends ListFragment {
         queue.add(myTourneys);
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        //Go to a tournament page
+        Toast toast = Toast.makeText(getActivity(), "Signed in!",
+                Toast.LENGTH_LONG);
+        toast.show();
+
     }
 }
