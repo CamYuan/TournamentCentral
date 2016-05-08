@@ -17,6 +17,25 @@
         <item>My Tournaments</item>
         <item>My Teams</item>
     </string-array>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+    </string-array>
+    <string-array name="years">
+        <item>2106</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+    </string-array>
     <string name="num_participants">Number of participants:</string>
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>

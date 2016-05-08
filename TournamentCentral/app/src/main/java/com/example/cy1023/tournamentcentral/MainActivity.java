@@ -1,9 +1,7 @@
 package com.example.cy1023.tournamentcentral;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.widget.DrawerLayout;
@@ -17,14 +15,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.content.res.Configuration;
 import android.app.FragmentManager;
-import android.widget.Toast;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class MainActivity extends Activity {
@@ -35,9 +25,9 @@ public class MainActivity extends Activity {
     private ActionBarDrawerToggle drawerToggle;
     private int currentPosition = 0;
     //use for database Query so they don't have to log in every time/
-    public String local_userID;
-    public String local_password;
-    public boolean signedIn = false;
+    public String local_userID = "cam";
+    public String local_password = "aaa" ;
+    public boolean signedIn = true;
 
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
@@ -119,8 +109,9 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
-        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
-        //menu.findItem(R.id.action_share).setVisible(!drawerOpen);
+        //boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
+        menu.findItem(R.id.host_tourney).setVisible(signedIn);
+        menu.findItem(R.id.create_team).setVisible(signedIn);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -175,11 +166,12 @@ public class MainActivity extends Activity {
 
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem menuItem=menu.findItem(R.id.host_tourney);
-        shareActionProvider=(ShareActionProvider) menuItem.getActionProvider();
+        //MenuItem menuItem=menu.findItem(R.id.host_tourney);
+        //shareActionProvider=(ShareActionProvider) menuItem.getActionProvider();
         //setIntent("This is example text");
         return super.onCreateOptionsMenu(menu);
     }
@@ -197,21 +189,25 @@ public class MainActivity extends Activity {
         }
         switch (item.getItemId()){
             case R.id.host_tourney:
-                if (signedIn){
-                    HostFragment fragment = new HostFragment();
-                    this.getFragmentManager().beginTransaction()
-                            .replace(R.id.content_frame, fragment, null)
-                            .addToBackStack(null)
-                            .commit();
-                    drawerLayout.closeDrawer(drawerList);}
-                else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setMessage("Must be logged in to host a Tournament.")
-                            .setNegativeButton("OK", null)
-                            .create()
-                            .show();
-                }
+                HostFragment Hostfragment = new HostFragment();
+                this.getFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, Hostfragment, null)
+                        .addToBackStack(null)
+                        .commit();
+                drawerLayout.closeDrawer(drawerList);
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Must be logged in to host a Tournament.")
+                        .setNegativeButton("OK", null)
+                        .create()
+                        .show();*/
                 return true;
+            case R.id.create_team:
+                CreateTeamFragment createFrag = new CreateTeamFragment();
+                this.getFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, createFrag, null)
+                        .addToBackStack(null)
+                        .commit();
+                drawerLayout.closeDrawer(drawerList);
             case R.id.action_settings:
                 //TODO: implement settings?
                 return true;

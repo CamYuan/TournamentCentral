@@ -6,14 +6,12 @@
         android:id="@+id/host_tourney"
         android:orderInCategory="1"
         android:title="@string/host_tournament"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_add_shopping_cart_black_48dp"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/create_team"
         android:orderInCategory="2"
         android:title="@string/action_create_team"
-        app:showAsAction="ifRoom"
-        android:actionProviderClass="android.widget.ShareActionProvider"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

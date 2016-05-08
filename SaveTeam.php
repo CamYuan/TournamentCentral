@@ -6,7 +6,7 @@
 
 
     $statement = mysqli_prepare($con, "INSERT INTO teams (coach, team_name) VALUES (?, ?)");
-    mysqli_stmt_bind_param($statement, "siss", $coach, $team_name);
+    mysqli_stmt_bind_param($statement, "ss", $coach, $team_name);
     mysqli_stmt_execute($statement);
 
     $response = array();

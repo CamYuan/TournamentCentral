@@ -15,62 +15,113 @@
         android:ems="10"
         android:hint="Name your Tournament" />
 
-    <Spinner
-        android:id="@+id/tourney_type"
+    <LinearLayout
+        android:id="@+id/spinners"
+        android:layout_below="@id/tourney_name"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tourney_name"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+        android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/tourney_format"
-        android:layout_below="@+id/tourney_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/tourney_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/tourney_format"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tourney_format"
+        android:layout_below="@id/spinners"
         android:id="@+id/num_teams"
         android:text="@string/num_participants"
         />
 
     <Spinner
         android:id="@+id/num_teams_dropdown"
-        android:layout_below="@+id/num_teams"
-        android:layout_width="match_parent"
+        android:layout_below="@id/num_teams"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
-
-    <Button
+    <LinearLayout
         android:id="@+id/start_date"
-        android:layout_below="@+id/num_teams_dropdown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
-        android:onClick="setDate"/>
-    <Button
+        android:layout_below="@id/num_teams_dropdown"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Spinner
+            android:id="@+id/start_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+        <Spinner
+            android:id="@+id/start_day"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+        <Spinner
+            android:id="@+id/start_year"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/end_date"
-        android:layout_below="@+id/num_teams_dropdown"
-        android:layout_toRightOf="@+id/start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End"
-        android:onClick="setDate"/>
+        android:layout_below="@id/start_date"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Spinner
+            android:id="@+id/end_month"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <Spinner
+            android:id="@+id/end_day"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+        <Spinner
+            android:id="@+id/end_year"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/create_tournament"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/end_date"
+        android:layout_centerHorizontal="true"
         android:text="Create" />
 </RelativeLayout>

@@ -9,18 +9,21 @@
   	  die(mysqli_error($connection));
   	}
     mysqli_stmt_execute($statement);
-
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $tournamentID, $host, $team_name);
+    mysqli_stmt_bind_result($statement, $tournament_name, $host, $start_date, $end_date, $type, $format, $num_teams);
 
     $response = array();
     $rows = array();
 
     while(mysqli_stmt_fetch($statement)){
-        $rows["teamID"] = $coach;
-        $rows["coach"] = $coach;
-        $rows["team_name"] = $team_name;
-        $response[] = $rows;
+      $rows["tournament_name"] = $tournament_name;
+      $rows["host"] = $host;
+      $rows["start_date"] = $start_date;
+      $rows["end_date"] = $end_date;
+      $rows["type"] =$type;
+      $rows["format"] = $format;
+      $rows["num_teams"] = $num_teams;
+      $response[] = $rows;
     }
 
     echo json_encode($response);
