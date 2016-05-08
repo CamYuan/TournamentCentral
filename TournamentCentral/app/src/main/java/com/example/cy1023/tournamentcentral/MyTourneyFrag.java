@@ -15,9 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class MyTourneyFrag extends ListFragment {
+    private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/MyTournaments.php";
 
     //get SQL tournaments and show them
     List<String> tourneys = new ArrayList<String>();
@@ -31,12 +34,13 @@ public class MyTourneyFrag extends ListFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).setActionBarTitleFromFragment("Manage Tournaments");
         // Response received from the server
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.i("Debug", response);
+                    //Log.i("Debug", response);
                     //load the Json array that you get from the PHP file
                     // "[" Brackets indicate JSON Array
                     // "{" Curly Braces indicate JSON Objects
@@ -45,9 +49,11 @@ public class MyTourneyFrag extends ListFragment {
                     for (int i=0; i<resultsArray.length(); i++){
                         JSONObject tourney_object = resultsArray.getJSONObject(i);
                         String tourney_name = tourney_object.getString("tournament_name");
-                        Log.i("Debug", tourney_name);
-                        tourneys.add(tourney_name);
+                        //Log.i("Debug", tourney_name);
+                        if(Objects.equals(tourney_object.getString("coach"), ((MainActivity) getActivity()).local_userID) || !tourneys.contains(tourney_name)){
+                            tourneys.add(tourney_name);}
                     }
+                    tourneys = new ArrayList<String>(new LinkedHashSet<String>(tourneys));
                     Collections.sort(tourneys);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                             inflater.getContext(),
@@ -60,9 +66,9 @@ public class MyTourneyFrag extends ListFragment {
             }
         };
 
-        TourneyRequest teamRequest = new TourneyRequest(responseListener);
+        MyRequests myTourneys = new MyRequests(((MainActivity) getActivity()).local_userID, LOGIN_REQUEST_URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(teamRequest);
+        queue.add(myTourneys);
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

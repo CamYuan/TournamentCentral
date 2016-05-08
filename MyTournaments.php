@@ -3,27 +3,25 @@
   	if ( !$connection ) {
   	  die( 'connect error: '.mysqli_connect_error() );
   	}
+    $username = $_POST["username"];
 
-    $statement = mysqli_prepare($connection, "SELECT * FROM tournaments");
+    $statement = mysqli_prepare($connection, "SELECT * FROM registered_teams INNER JOIN teams ON registered_teams.teamID=teams.teamID");
   	if ( !$statement ) {
   	  die(mysqli_error($connection));
   	}
     mysqli_stmt_execute($statement);
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $tourneyID, $tournament_name, $host, $start_date, $end_date, $type, $format, $num_teams);
+    mysqli_stmt_bind_result($statement, $tournament_name, $teamID1, $teamID2, $coach, $team_name);
 
     $response = array();
     $rows = array();
 
     while(mysqli_stmt_fetch($statement)){
-      $rows["tourneyID"] = $tourneyID;
       $rows["tournament_name"] = $tournament_name;
-      $rows["host"] = $host;
-      $rows["start_date"] = $start_date;
-      $rows["end_date"] = $end_date;
-      $rows["type"] =$type;
-      $rows["format"] = $format;
-      $rows["num_teams"] = $num_teams;
+      $rows["teamID1"] = $teamID1;
+      $rows["teamID2"] = $teamID2;
+      $rows["coach"] = $coach;
+      $rows["team_name"] =$team_name;
       $response[] = $rows;
     }
 

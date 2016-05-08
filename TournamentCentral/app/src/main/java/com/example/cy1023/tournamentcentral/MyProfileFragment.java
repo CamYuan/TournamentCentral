@@ -26,15 +26,15 @@ public class MyProfileFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Fragment fragment;
-        String title = "";
         switch (position) {
             case 0:
                 fragment = new MyTourneyFrag();
-                title = "My Tournaments";
                 break;
             case 1:
                 fragment = new MyTeamsFragment();
-                title = "My Teams";
+                break;
+            case 2:
+                fragment = new MyHostedTourneysFrag();
                 break;
             default:
                 fragment = new TopFragment();
@@ -44,7 +44,6 @@ public class MyProfileFragment extends ListFragment {
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-        ((MainActivity) getActivity()).setActionBarTitleFromFragment(title);
         super.onListItemClick(l, v, position, id);
     }
 

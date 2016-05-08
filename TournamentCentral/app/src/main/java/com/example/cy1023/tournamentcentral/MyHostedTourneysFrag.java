@@ -1,6 +1,5 @@
 package com.example.cy1023.tournamentcentral;
 
-
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
@@ -8,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -17,16 +18,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
-
-public class TournamentsFragment extends ListFragment {
+public class MyHostedTourneysFrag extends ListFragment {
+    //private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/MyHostedTourneys.php";
     private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/QueryTourneys.php";
-
     //get SQL tournaments and show them
     List<String> tourneys = new ArrayList<String>();
 
 
-    public TournamentsFragment() {
+    public MyHostedTourneysFrag() {
         // Required empty public constructor
     }
 
@@ -34,6 +35,7 @@ public class TournamentsFragment extends ListFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).setActionBarTitleFromFragment("My Host");
         // Response received from the server
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -48,8 +50,10 @@ public class TournamentsFragment extends ListFragment {
                     for (int i=0; i<resultsArray.length(); i++){
                         JSONObject tourney_object = resultsArray.getJSONObject(i);
                         String tourney_name = tourney_object.getString("tournament_name");
-                        Log.i("Debug", tourney_name);
-                        tourneys.add(tourney_name);
+                        //Log.i("Debug", tourney_name);
+                        //TODO: Query not working  correctly, comparing for my tournaments in local storage...
+                        if(Objects.equals(tourney_object.getString("host"), ((MainActivity) getActivity()).local_userID)){
+                            tourneys.add(tourney_name);}
                     }
                     Collections.sort(tourneys);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -62,10 +66,10 @@ public class TournamentsFragment extends ListFragment {
                 }
             }
         };
-
-        CustomRequests teamRequest = new CustomRequests(LOGIN_REQUEST_URL, responseListener);
+        //should used MyRequests()
+        CustomRequests myTourneys = new CustomRequests(LOGIN_REQUEST_URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
-        queue.add(teamRequest);
+        queue.add(myTourneys);
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }

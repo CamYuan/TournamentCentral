@@ -22,6 +22,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class TeamsFragments extends ListFragment {
+    private static final String LOGIN_REQUEST_URL = "http://tourneycentral.comli.com/QueryTeams.php";
 
     List<String> teams = new ArrayList<String>();
 
@@ -63,7 +64,7 @@ public class TeamsFragments extends ListFragment {
             }
         };
 
-        TeamRequest teamRequest = new TeamRequest(responseListener);
+        CustomRequests teamRequest = new CustomRequests(LOGIN_REQUEST_URL, responseListener);
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         queue.add(teamRequest);
 

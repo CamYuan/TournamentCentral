@@ -17,6 +17,7 @@ import android.content.res.Configuration;
 import android.app.FragmentManager;
 
 
+
 public class MainActivity extends Activity {
     private ShareActionProvider shareActionProvider;
     private String[] titles;
@@ -149,7 +150,7 @@ public class MainActivity extends Activity {
         outstate.putInt("position", currentPosition);
     }
     public void setActionBarTitleFromFragment(String title){
-        getActionBar().setTitle(title);
+        this.getActionBar().setTitle(title);
     }
 
     private void setActionBarTitle(int position){
