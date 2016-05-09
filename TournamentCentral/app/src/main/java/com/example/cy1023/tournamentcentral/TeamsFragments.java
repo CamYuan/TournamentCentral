@@ -1,6 +1,7 @@
 package com.example.cy1023.tournamentcentral;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -69,5 +72,22 @@ public class TeamsFragments extends ListFragment {
         queue.add(teamRequest);
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        //Go to a tournament page
+        String value = (String) getListAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("team_name", value);
+
+        Fragment fragment = new InfoTeamFragment();
+        fragment.setArguments(bundle);
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment, null)
+                .addToBackStack(null)
+                .commit();
+        super.onListItemClick(l, v, position, id);
+
     }
 }

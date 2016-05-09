@@ -36,7 +36,7 @@
     <string name="num_participants">Number of participants:</string>
     <string name="open_drawer">Open drawer</string>
     <string name="close_drawer">Close drawer</string>
-    <string name="info">Tournament Central aims to bring you up-to-date, minute-by-minute updates on any tournaments being hosted using this application. Get started by opening the menu above and search for upcoming tournaments
+    <string name="info">Tournament Central aims to bring you up-to-date, minute-by-minute updates on any tournaments being hosted using this application. \n\nGet started by opening the menu above and search for upcoming tournaments
     or host your own in the myProfile tab.</string>
     <string name="top_home">Welcome to Tournament Central</string>
 

@@ -1,6 +1,7 @@
 package com.example.cy1023.tournamentcentral;
 
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -39,7 +42,7 @@ public class TournamentsFragment extends ListFragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.i("Debug", response);
+                    //Log.i("Debug", response);
                     //load the Json array that you get from the PHP file
                     // "[" Brackets indicate JSON Array
                     // "{" Curly Braces indicate JSON Objects
@@ -48,7 +51,7 @@ public class TournamentsFragment extends ListFragment {
                     for (int i=0; i<resultsArray.length(); i++){
                         JSONObject tourney_object = resultsArray.getJSONObject(i);
                         String tourney_name = tourney_object.getString("tournament_name");
-                        Log.i("Debug", tourney_name);
+                        //Log.i("Debug", tourney_name);
                         tourneys.add(tourney_name);
                     }
                     Collections.sort(tourneys);
@@ -68,5 +71,22 @@ public class TournamentsFragment extends ListFragment {
         queue.add(teamRequest);
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        //Go to a tournament page
+        String value = (String) getListAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("tournament_name", value);
+
+        Fragment fragment = new InfoTournamentFragment();
+        fragment.setArguments(bundle);
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment, null)
+                .addToBackStack(null)
+                .commit();
+        super.onListItemClick(l, v, position, id);
+
     }
 }

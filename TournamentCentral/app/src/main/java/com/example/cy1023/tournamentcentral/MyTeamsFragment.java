@@ -1,5 +1,6 @@
 package com.example.cy1023.tournamentcentral;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -49,11 +51,11 @@ public class MyTeamsFragment extends ListFragment {
                     JSONArray resultsArray = new JSONArray(response);
                     for (int i=0; i<resultsArray.length(); i++){
                         JSONObject teams_object = resultsArray.getJSONObject(i);
-                        String tourney_name = teams_object.getString("team_name");
+                        String team_name = teams_object.getString("team_name");
                         //Log.i("Debug", tourney_name);
                         //TODO: Query not working  correctly, comparing for my tournaments in local storage...
                         if(Objects.equals(teams_object.getString("coach"), ((MainActivity) getActivity()).local_userID)){
-                            tourneys.add(tourney_name);}
+                            tourneys.add(team_name);}
                     }
                     Collections.sort(tourneys);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -72,5 +74,22 @@ public class MyTeamsFragment extends ListFragment {
         queue.add(myTourneys);
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        //Go to a tournament page
+        String value = (String) getListAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("team_name", value);
+
+        InfoTeamFragment fragment = new InfoTeamFragment();
+        fragment.setArguments(bundle);
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment, null)
+                .addToBackStack(null)
+                .commit();
+        super.onListItemClick(l, v, position, id);
+
     }
 }

@@ -1,5 +1,8 @@
 package com.example.cy1023.tournamentcentral;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -44,7 +48,7 @@ public class MyTourneyFrag extends ListFragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    //Log.i("Debug", response);
+                    Log.i("Debug", response);
                     //load the Json array that you get from the PHP file
                     // "[" Brackets indicate JSON Array
                     // "{" Curly Braces indicate JSON Objects
@@ -54,6 +58,7 @@ public class MyTourneyFrag extends ListFragment {
                         JSONObject tourney_object = resultsArray.getJSONObject(i);
                         String tourney_name = tourney_object.getString("tournament_name");
                         //Log.i("Debug", tourney_name);
+                        //TODO: Fix SQL query so we don't have to compare in local storage
                         if(Objects.equals(tourney_object.getString("coach"), ((MainActivity) getActivity()).local_userID) || !tourneys.contains(tourney_name)){
                             tourneys.add(tourney_name);}
                     }
@@ -80,9 +85,17 @@ public class MyTourneyFrag extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         //Go to a tournament page
-        Toast toast = Toast.makeText(getActivity(), "Signed in!",
-                Toast.LENGTH_LONG);
-        toast.show();
+        String value = (String) getListAdapter().getItem(position);
+        Bundle bundle = new Bundle();
+        bundle.putString("tournament_name", value);
+
+        Fragment fragment = new InfoTournamentFragment();
+        fragment.setArguments(bundle);
+        getActivity().getFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, fragment, null)
+                .addToBackStack(null)
+                .commit();
+        super.onListItemClick(l, v, position, id);
 
     }
 }

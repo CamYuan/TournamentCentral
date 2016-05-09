@@ -21,3 +21,10 @@ http://www.androidhive.info/2012/01/android-json-parsing-tutorial/
 
 Java/SQL Date Settings
 http://stackoverflow.com/questions/2305973/java-util-date-vs-java-sql-date
+
+Update dynamic data listview
+http://stackoverflow.com/questions/2250770/how-to-refresh-android-listview
+
+
+View?
+http://jsfiddle.net/7b572uzn/5/?utm_source=website&utm_medium=embed&utm_campaign=7b572uzn

@@ -113,6 +113,7 @@ public class MainActivity extends Activity {
         //boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
         menu.findItem(R.id.host_tourney).setVisible(signedIn);
         menu.findItem(R.id.create_team).setVisible(signedIn);
+        menu.findItem(R.id.sign_out).setVisible(signedIn);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -211,6 +212,17 @@ public class MainActivity extends Activity {
                 drawerLayout.closeDrawer(drawerList);
             case R.id.action_settings:
                 //TODO: implement settings?
+                return true;
+            case R.id.sign_out:
+                local_userID = null;
+                local_password = null;
+                signedIn = false;
+                TopFragment backHome = new TopFragment();
+                this.getFragmentManager().beginTransaction()
+                        .replace(R.id.content_frame, backHome, null)
+                        .addToBackStack(null)
+                        .commit();
+                drawerLayout.closeDrawer(drawerList);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
