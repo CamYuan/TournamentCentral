@@ -73,12 +73,22 @@ public class BracketViewFragment extends Fragment {
                 team_2.setText(the_bracket[i][j][1]);
                 team_1.setTextAppearance(android.R.style.TextAppearance_Small);
                 team_2.setTextAppearance(android.R.style.TextAppearance_Small);
-                //team_1.setGravity(Gravity.LEFT);
-                //team_1.setGravity(Gravity.RIGHT);
-                //team_1.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
-                //team_2.setLayoutParams(new TableLayout.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+                team_1.setBackgroundResource(R.drawable.game_boxes);
+                team_2.setBackgroundResource(R.drawable.game_boxes);
+                TextView score1 = new TextView(getActivity());
+                TextView score2 = new TextView(getActivity());
+                score1.setBackgroundResource(R.drawable.scores_boxes);
+                score2.setBackgroundResource(R.drawable.scores_boxes);
+                team_row1.setWeightSum(3);
+                team_row2.setWeightSum(3);
+                score1.setText("0");
+                score2.setText("0");
+                //team_1.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
+                //team_2.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
                 team_row1.addView(team_1);
+                team_row1.addView(score1);
                 team_row2.addView(team_2);
+                team_row2.addView(score2);
                 populate.addView(team_row1);
                 populate.addView(team_row2);
             }

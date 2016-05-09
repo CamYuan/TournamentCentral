@@ -28,3 +28,6 @@ http://stackoverflow.com/questions/2250770/how-to-refresh-android-listview
 
 View?
 http://jsfiddle.net/7b572uzn/5/?utm_source=website&utm_medium=embed&utm_campaign=7b572uzn
+
+HTML view in text view
+http://stackoverflow.com/questions/2116162/how-to-display-html-in-textview

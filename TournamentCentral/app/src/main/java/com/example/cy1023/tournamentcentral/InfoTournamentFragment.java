@@ -166,22 +166,26 @@ public class InfoTournamentFragment extends Fragment {
     public String[][][] single_elimination(int participants, List<String> bracket, String format) {
         int rounds = 0;
         int games = (int) Math.ceil(bracket.size() / 2);
-        Toast toast = Toast.makeText(getActivity(), ""+bracket.size()+"",
-                Toast.LENGTH_LONG);
-        toast.show();
         while (participants != 1) {
             rounds++;
             participants /= 2;
         }
         String[][][] Rounds;
+
         switch (format) {
             case "Standard Seeding":
-                Rounds = new String[rounds][games][2];
-                for (int i = 1; i < rounds; i++) {
-                    for (int j = 0; j < games; j ++) {
+                Rounds = new String[rounds][][];
+                for (int i = 0; i < Rounds.length; i++) {
+                    String[][] game = new String[games][2];
+                    Rounds[i] = game;
+                    games /= 2;
+                }
+                //Rounds = new String[rounds][games][2];
+                for (int i = 1; i < Rounds.length; i++) {
+                    for (int j = 0; j < Rounds[i].length; j ++) {
                         for (int k = 0; k < 2; k ++) {
-                        Rounds[i][j][k] = "BYE";}}}
-                for (int j = 0; j < games; j++) {
+                            Rounds[i][j][k] = "BYE";}}}
+                for (int j = 0; j < Rounds[0].length; j++) {
                     if (Objects.equals(bracket.get(j), bracket.get(bracket.size()-1-j))) {
                         Rounds[0][j][0] = bracket.get(j);
                         Rounds[0][j][1] = "BYE";
@@ -192,8 +196,8 @@ public class InfoTournamentFragment extends Fragment {
                 }
                 int extra_round_games = 0;
                 int jj, jjj;
-                for (int i = 1; i < rounds; i++) {
-                    for (int j = 0; j < games; j = j +2) {
+                for (int i = 1; i < Rounds.length; i++) {
+                    for (int j = 0; j < Rounds[i].length; j = j +2) {
                         jj=j+1;
                         if (Objects.equals(bracket.get(j), bracket.get(bracket.size()-1-j))) {
                             Rounds[i][extra_round_games][0] = "W of Round " + i + " Game " + jj;
@@ -208,8 +212,6 @@ public class InfoTournamentFragment extends Fragment {
                         }
                     }
                 }
-
-
 
                 break;
             case "Random Seeding":
