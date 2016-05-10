@@ -59,7 +59,7 @@ public class MyTourneyFrag extends ListFragment {
                         String tourney_name = tourney_object.getString("tournament_name");
                         //Log.i("Debug", tourney_name);
                         //TODO: Fix SQL query so we don't have to compare in local storage
-                        if(Objects.equals(tourney_object.getString("coach"), ((MainActivity) getActivity()).local_userID) || !tourneys.contains(tourney_name)){
+                        if(Objects.equals(tourney_object.getString("coach"), ((MainActivity) getActivity()).local_userID) && !tourneys.contains(tourney_name)){
                             tourneys.add(tourney_name);}
                     }
                     tourneys = new ArrayList<String>(new LinkedHashSet<String>(tourneys));
