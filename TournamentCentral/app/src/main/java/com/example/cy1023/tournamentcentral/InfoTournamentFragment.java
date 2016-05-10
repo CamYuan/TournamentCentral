@@ -171,6 +171,7 @@ public class InfoTournamentFragment extends Fragment {
             participants /= 2;
         }
         String[][][] Rounds;
+        //Log.i("BRACKET SIZE", bracket.size()+"");
 
         switch (format) {
             case "Standard Seeding":
@@ -187,6 +188,7 @@ public class InfoTournamentFragment extends Fragment {
                             Rounds[i][j][k] = "BYE";}}}
                 for (int j = 0; j < Rounds[0].length; j++) {
                     if (Objects.equals(bracket.get(j), bracket.get(bracket.size()-1-j))) {
+                    //if (j == Rounds[0].length-j){
                         Rounds[0][j][0] = bracket.get(j);
                         Rounds[0][j][1] = "BYE";
                     } else {
@@ -197,15 +199,19 @@ public class InfoTournamentFragment extends Fragment {
                 int extra_round_games = 0;
                 int jj, jjj;
                 for (int i = 1; i < Rounds.length; i++) {
-                    for (int j = 0; j < Rounds[i].length; j = j +2) {
+                    //Log.i("ROUNDS", "round: " + i);
+                    for (int j = 0; j < Rounds[i].length; j++) {
+                        //Log.i("GAMES", "games " + j);
+                        //Log.i("YUP", Rounds[i][j][0]+"");
                         jj=j+1;
                         if (Objects.equals(bracket.get(j), bracket.get(bracket.size()-1-j))) {
-                            Rounds[i][extra_round_games][0] = "W of Round " + i + " Game " + jj;
-                            Rounds[i][extra_round_games][1] = "BYE";
+                        //if (j == Rounds[i].length-j){
+                            Rounds[i][j][0] = "W of Round " + i + " Game " + jj;
+                            Rounds[i][j][1] = "BYE";
                         } else {
                             jjj = j+2;
-                            Rounds[i][extra_round_games][0] = "W of Round " + i + " Game " + jj;
-                            Rounds[i][extra_round_games][1] = "W of Round " + i + " Game " + jjj;
+                            Rounds[i][j][0] = "W of Round " + i + " Game " + jj;
+                            Rounds[i][j][1] = "W of Round " + i + " Game " + jjj;
                         }
                         if (extra_round_games%2 == 0){
                             extra_round_games++;
